@@ -1,4 +1,4 @@
-package vehicale.state;
+package vehicle.state;
 
 public interface State {
 
@@ -20,7 +20,7 @@ public interface State {
   }
 
   enum PedalState implements State {
-    PRESSED, REALESED
+    PRESSED, RELEASED
   }
 
   enum WheelsState implements State {

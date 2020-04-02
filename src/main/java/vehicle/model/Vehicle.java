@@ -1,15 +1,15 @@
-package vehicale.model;
+package vehicle.model;
 
-import vehicale.model.components.CarPart;
-import vehicale.model.components.Engine;
-import vehicale.model.components.Ignition;
-import vehicale.model.components.Wheel;
-import vehicale.model.components.BoxGears;
-import vehicale.model.components.pedal.BreakPedal;
-import vehicale.model.components.pedal.GasPedal;
+import vehicle.model.components.CarPart;
+import vehicle.model.components.Engine;
+import vehicle.model.components.Ignition;
+import vehicle.model.components.Wheel;
+import vehicle.model.components.BoxGears;
+import vehicle.model.components.pedal.BreakPedal;
+import vehicle.model.components.pedal.GasPedal;
 
 import java.util.*;
-import vehicale.strategy.TravelStrategy;
+import vehicle.strategy.TravelStrategy;
 
 public abstract class Vehicle implements Moveable{
 

@@ -1,4 +1,4 @@
-package vehicale.model;
+package vehicle.model;
 
 public interface Moveable extends Controllable {
 

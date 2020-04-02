@@ -1,6 +1,6 @@
-package vehicale.model.components;
+package vehicle.model.components;
 
-import vehicale.state.State;
+import vehicle.state.State;
 
 public class Ignition extends CarPart {
 

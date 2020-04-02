@@ -1,4 +1,4 @@
-package vehicale.model.components.pedal;
+package vehicle.model.components.pedal;
 
 public class BreakPedal extends Pedal {
 

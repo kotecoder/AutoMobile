@@ -1,11 +1,12 @@
-package vehicale.model;
+package vehicle.model;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vehicale.model.components.CarPart;
-import vehicale.state.State;
-import vehicale.state.State.CarState;
-import vehicale.strategy.TravelStrategy;
+import vehicle.model.components.CarPart;
+import vehicle.state.State;
+import vehicle.state.State.CarState;
+import vehicle.state.State.PedalState;
+import vehicle.strategy.TravelStrategy;
 
 
 public class Car extends Vehicle {
@@ -101,7 +102,7 @@ public class Car extends Vehicle {
   }
 
   public void releaseGasPedal() {
-    getCarPart(GAS_PEDAL).change(State.PedalState.REALESED);
+    getCarPart(GAS_PEDAL).change(State.PedalState.RELEASED);
   }
 
   public void pressBreakPedal() {
@@ -109,7 +110,7 @@ public class Car extends Vehicle {
   }
 
   public void releaseBreakPedal() {
-    getCarPart(BREAK_PEDAL).change(State.PedalState.REALESED);
+    getCarPart(BREAK_PEDAL).change(State.PedalState.RELEASED);
   }
 
   public void steerLeft() {
@@ -134,10 +135,9 @@ public class Car extends Vehicle {
 
   public void parking() {
     if (!State.CarState.STOP.equals(getCarState())) {
-      logger.error("Error: You just tried to put the car in park while it was moving!");
+      logger.error("You just tried to put the car in the park while it was moving!");
+      return;
     }
-    pressBreakPedal();
-    changeCarState(State.CarState.STOP);
     putCarInPark();
     releaseBreakPedal();
     changeCarState(State.CarState.PARKED);
@@ -145,17 +145,24 @@ public class Car extends Vehicle {
   }
 
   public void moveReverse() {
-    putCarInReverse();
-    pressGasPedal();
-    releaseGasPedal();
-    changeCarState(CarState.MOVING_REVERSE);
+    if (CarState.STOP.equals(getCarState())) {
+      releaseBreakPedal();
+      putCarInReverse();
+      pressGasPedal();
+      steerStraight();
+      changeCarState(CarState.MOVING_REVERSE);
+    }
   }
 
   public void stop() {
     releaseGasPedal();
-    pressBreakPedal();
-    putCarInNeitral();
-    changeCarState(State.CarState.STOP);
+    if (getCarPart(GAS_PEDAL).getState().equals(PedalState.RELEASED)) {
+      pressBreakPedal();
+      putCarInNeitral();
+      changeCarState(State.CarState.STOP);
+    } else {
+      logger.error("You just tried to stop the car while still pressing gas pedal");
+    }
   }
 
   public void turnRight() {
@@ -163,7 +170,6 @@ public class Car extends Vehicle {
       steerRight();
       changeCarState(State.CarState.MOVING_RIGHT);
     }
-
   }
 
   public void moveForward() {
@@ -172,7 +178,11 @@ public class Car extends Vehicle {
       pressGasPedal();
       steerStraight();
       changeCarState(State.CarState.MOVING_FORWARD);
-
+      return;
+    }
+    if (getCarState().equals(CarState.MOVING_RIGHT)) {
+      steerStraight();
+      changeCarState(State.CarState.MOVING_FORWARD);
     }
   }
 

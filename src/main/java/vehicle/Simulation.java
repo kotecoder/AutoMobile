@@ -1,11 +1,11 @@
-package vehicale;
+package vehicle;
 
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vehicale.model.Vehicle;
-import vehicale.strategy.BlockTravel;
-import vehicale.model.Car;
+import vehicle.model.Vehicle;
+import vehicle.strategy.BlockTravel;
+import vehicle.model.Car;
 
 public class Simulation {
     private static final Logger logger

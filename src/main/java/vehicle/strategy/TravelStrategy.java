@@ -1,4 +1,4 @@
-package vehicale.strategy;
+package vehicle.strategy;
 
 public interface TravelStrategy {
 

@@ -1,13 +1,14 @@
-package vehicale.strategy;
+package vehicle.strategy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vehicale.model.Vehicle;
+import vehicle.model.Vehicle;
 
 public class BlockTravel implements TravelStrategy {
 
   private static final Logger logger
       = LoggerFactory.getLogger(BlockTravel.class);
+
   private Vehicle vehicle;
 
   public BlockTravel(Vehicle vehicle) {

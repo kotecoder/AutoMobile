@@ -1,8 +1,8 @@
-package vehicale.model.components;
+package vehicle.model.components;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import vehicale.state.State;
+import vehicle.state.State;
 
 public abstract class CarPart {
     private static final Logger logger
